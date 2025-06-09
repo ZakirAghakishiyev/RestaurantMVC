@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using RestaurantMVC.DataContext;
+
 namespace RestaurantMVC
 {
     public class Program
@@ -8,6 +11,12 @@ namespace RestaurantMVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSession();
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+            });
 
             var app = builder.Build();
 
@@ -27,9 +36,12 @@ namespace RestaurantMVC
             app.UseAuthorization();
 
             app.MapControllerRoute(
+                name: "area",
+                pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
+                );
+            app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
             app.Run();
         }
     }
