@@ -1,0 +1,46 @@
+﻿@model MenuItem
+
+<div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label class="form-label" asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" placeholder="Item name..." />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" placeholder="Item description..."></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" placeholder="Item price..." />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Category"></label>
+            <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control">
+                <option value="">Category</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Img"></label>
+            <input asp-for="Img" type="file" class="form-control" />
+            <span asp-validation-for="Img" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input asp-for="IsAvailable" class="form-check-input" />
+            <label class="form-check-label" asp-for="IsAvailable">Available</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

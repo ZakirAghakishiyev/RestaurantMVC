@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Create Role";
+}
+
+<div class="card-body">
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label" for="roleName">Role Name</label>
+            <input name="roleName" class="form-control" id="roleName" placeholder="e.g. Admin, Staff..." />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-light">Cancel</a>
+    </form>
+</div>

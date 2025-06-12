@@ -1,0 +1,70 @@
+﻿@model List<Chef>
+
+<a asp-controller="chef" asp-action="create" class="btn btn-primary" style="width:100px">Create</a>
+
+<div class="card">
+    <h5 class="card-header">Chefs</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Role(s)</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>@item.Id</strong></td>
+                        <td>@item.Fullname</td>
+                        <td><img src="~/images/chef/@item.CoverImgUrl" alt="@item.Fullname" style="width: 75px" /></td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a asp-controller="chef" asp-action="update" asp-route-id="@item.Id" class="dropdown-item"><i class="bx bx-edit-alt me-1"></i> Update</a>
+                                    <a onclick="DeleteFunc(@item.Id,this)" class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function DeleteFunc(id, button){
+    const url = '/admin/chef/delete';
+    const data = {
+      id: id,
+    };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    fetch(url, options)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        button.parentNode.parentNode.parentNode.parentNode.remove();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+    }
+</script>

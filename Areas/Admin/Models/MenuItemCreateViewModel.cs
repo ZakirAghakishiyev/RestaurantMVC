@@ -1,16 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using RestaurantMVC.DataContext.Entities;
 
-namespace RestaurantMVC.DataContext.Entities
+namespace RestaurantMVC.Areas.Admin.Models
 {
-    public class MenuItem
+    public class MenuItemCreateViewModel
     {
-        public int Id { get; set; }
         public required string Name { get; set; }
         public required string Description { get; set; }
         public required decimal Price { get; set; }
-        public required string ImgUrl { get; set; }
-        [NotMapped]
-        public IFormFile? Img{ get; set; }
+        public IFormFile? Img { get; set; }
         public required int CategoryId { get; set; }
         public Category? Category { get; set; }
         public bool IsAvailable { get; set; }

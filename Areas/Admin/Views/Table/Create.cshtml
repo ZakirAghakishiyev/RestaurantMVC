@@ -1,0 +1,22 @@
+﻿@model TableCreateViewModel
+
+<div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label" for="basic-default-fullname">Table Number</label>
+            <input asp-for="Number" class="form-control" id="basic-default-fullname" placeholder="1" />
+            <span asp-validation-for="Number" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="basic-default-fullname">Table Capacity</label>
+            <input asp-for="Capacity" class="form-control" id="basic-default-fullname" placeholder="2" />
+            <span asp-validation-for="Capacity" class="text-danger"></span>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Send</button>
+        <a asp-action="index" class="btn btn-light">Cancel</a>
+
+    </form>
+</div>
