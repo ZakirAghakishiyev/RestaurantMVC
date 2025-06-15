@@ -1,0 +1,80 @@
+﻿@model List<Reservation>
+
+<a asp-controller="reservation" asp-action="create" class="btn btn-primary mb-3" style="width:100px">Create</a>
+
+<div class="btn-group mb-3">
+    <a asp-action="index" asp-route-filter="all" class="btn btn-outline-primary @(Context.Request.Query["filter"] == "all" ? "active" : "")">All</a>
+    <a asp-action="index" asp-route-filter="upcoming" class="btn btn-outline-primary @(Context.Request.Query["filter"] == "upcoming" ? "active" : "")">Upcoming</a>
+    <a asp-action="index" asp-route-filter="past" class="btn btn-outline-primary @(Context.Request.Query["filter"] == "past" ? "active" : "")">Past</a>
+</div>
+
+<div class="card">
+    <h5 class="card-header">Reservations</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Guest Name</th>
+                    <th>Phone</th>
+                    <th>Table No</th>
+                    <th>Table Capacity</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><strong>@item.Id</strong></td>
+                        <td>@item.GuestFirstName @item.GuestLastName</td>
+                        <td>@item.GuestPhoneNumber</td>
+                        <td>@item.TableId</td>
+                        <td>@item.Table?.Capacity</td>
+                        <td>@item.ReservationStartTime.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>
+                            @(item.ReservationEndTime.HasValue
+                                ? item.ReservationEndTime.Value.ToString("yyyy-MM-dd HH:mm")
+                                : "N/A")
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a asp-controller="reservation" asp-action="update" asp-route-id="@item.Id" class="dropdown-item"><i class="bx bx-edit-alt me-1"></i> Update</a>
+                                    <a asp-controller="reservation" asp-action="details" asp-route-id="@item.Id" class="dropdown-item"><i class="bx bx-fullscreen me-1"></i>Details</a>
+                                    <a asp-controller="reservation" asp-action="update" asp-route-id="@item.Id" class="dropdown-item"><i class="bx bx-edit-alt me-1"></i> Update</a>
+                                    <a onclick="DeleteFunc(@item.Id,this)" class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function DeleteFunc(id, button){
+        const url = '/admin/reservation/delete';
+        const data = { id: id };
+
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            button.closest('tr').remove();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>

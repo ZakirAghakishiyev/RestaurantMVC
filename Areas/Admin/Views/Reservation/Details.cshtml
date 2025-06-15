@@ -1,0 +1,67 @@
+﻿@model ReservationDetailsViewModel
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Reservation Details</h4>
+        <dl class="row">
+            <dt class="col-sm-3">Guest Name:</dt>
+            <dd class="col-sm-9">@Model.GuestFirstName @Model.GuestLastName</dd>
+
+            <dt class="col-sm-3">Phone Number:</dt>
+            <dd class="col-sm-9">@Model.GuestPhoneNumber</dd>
+
+            <dt class="col-sm-3">Reservation Date:</dt>
+            <dd class="col-sm-9">@Model.ReservationStartTime.ToString("yyyy-MM-dd")</dd>
+
+            <dt class="col-sm-3">Time:</dt>
+            <dd class="col-sm-9">@Model.ReservationStartTime.ToString("HH:mm")</dd>
+
+            <dt class="col-sm-3">Ends At:</dt>
+            <dd class="col-sm-9">
+                @(Model.ReservationEndTime.HasValue
+                    ? Model.ReservationEndTime.Value.ToString("yyyy-MM-dd HH:mm")
+                    : "N/A")
+            </dd>
+        </dl>
+    </div>
+</div>
+
+@if (Model.LocalOrders != null && Model.LocalOrders.Any())
+{
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Related Orders</h5>
+
+            @foreach (var order in Model.LocalOrders)
+            {
+                <div class="mb-4 border p-3 rounded shadow-sm">
+                    <h6>Order #@order.Id</h6>
+                    <p><strong>Table:</strong> @order.TableNo</p>
+                    <p><strong>Date:</strong> @order.OrderDate.ToString("yyyy-MM-dd HH:mm")</p>
+
+                    @if (order.OrderItems != null && order.OrderItems.Any())
+                    {
+                        <ul class="list-group list-group-flush">
+                            @foreach (var item in order.OrderItems)
+                            {
+                                <li class="list-group-item">
+                                    <i class="bx bx-dish me-2"></i> @item.MenuItemName (ID: @item.MenuItemId)
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No items in this order.</p>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <p class="mt-4 text-muted">No local orders found for this reservation.</p>
+}
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Back to List</a>

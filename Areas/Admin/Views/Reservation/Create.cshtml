@@ -1,0 +1,45 @@
+﻿@* @model ReservationCreateViewModel
+
+<div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label" asp-for="People"></label>
+            <input asp-for="People" type="number" class="form-control" min="1" max="20" placeholder="Number of people" />
+            <span asp-validation-for="People" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Day"></label>
+            <input asp-for="Day" type="date" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            <span asp-validation-for="Day" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Time"></label>
+            <input asp-for="Time" type="time" class="form-control" />
+            <span asp-validation-for="Time" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="GuestFirstName"></label>
+            <input asp-for="GuestFirstName" class="form-control" placeholder="First Name" />
+            <span asp-validation-for="GuestFirstName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="GuestLastName"></label>
+            <input asp-for="GuestLastName" class="form-control" placeholder="Last Name" />
+            <span asp-validation-for="GuestLastName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="GuestPhoneNumber"></label>
+            <input asp-for="GuestPhoneNumber" type="tel" class="form-control" placeholder="Phone Number" />
+            <span asp-validation-for="GuestPhoneNumber" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+ *@

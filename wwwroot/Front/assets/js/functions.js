@@ -670,7 +670,7 @@
             $(contactResult, contactForm).html('Please Wait...');
             $.ajax({
                 type: "POST",
-                url: "assets/php/contact.php",
+                url: "~/Front/assets/php/contact.php",
                 data: $(contactForm).serialize(),
                 timeout: 20000,
                 success: function(msg) {
@@ -684,46 +684,46 @@
 
     /* ------------------  AJAX RESERVATION POPUP FORM  ------------------ */
 
-    var reservationPopupForm = $(".reservationPopupForm"),
-        reservationResult = $('.reservation-result');
-    reservationPopupForm.validate({
-        debug: false,
-        submitHandler: function(reservationPopupForm) {
-            $(reservationResult, reservationPopupForm).html('Please Wait...');
-            $.ajax({
-                type: "POST",
-                url: "assets/php/reservationpopup.php",
-                data: $(reservationPopupForm).serialize(),
-                timeout: 20000,
-                success: function(msg) {
-                    $(reservationResult, reservationPopupForm).html('<div class="alert alert-success" role="alert"><strong>Thank you. We will contact you shortly.</strong></div>').delay(3000).fadeOut(2000);
-                },
-                error: $('.thanks').show()
-            });
-            return false;
-        }
-    });
+    //var reservationPopupForm = $(".reservationPopupForm"),
+    //    reservationResult = $('.reservation-result');
+    //reservationPopupForm.validate({
+    //    debug: false,
+    //    submitHandler: function(reservationPopupForm) {
+    //        $(reservationResult, reservationPopupForm).html('Please Wait...');
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "~/Front/assets/php/reservationpopup.php",
+    //            data: $(reservationPopupForm).serialize(),
+    //            timeout: 20000,
+    //            success: function(msg) {
+    //                $(reservationResult, reservationPopupForm).html('<div class="alert alert-success" role="alert"><strong>Thank you. We will contact you shortly.</strong></div>').delay(3000).fadeOut(2000);
+    //            },
+    //            error: $('.thanks').show()
+    //        });
+    //        return false;
+    //    }
+    //});
 
     /* ------------------  AJAX RESERVATION FORM  ------------------ */
 
-    var reservationForm = $(".reservationForm"),
-        reservationResult = $('.reservation-result');
-    reservationForm.validate({
-        debug: false,
-        submitHandler: function(reservationForm) {
-            $(reservationResult, reservationPopupForm).html('Please Wait...');
-            $.ajax({
-                type: "POST",
-                url: "assets/php/reservationpopup.php",
-                data: $(reservationForm).serialize(),
-                timeout: 20000,
-                success: function(msg) {
-                    $(reservationResult, reservationForm).html('<div class="alert alert-success" role="alert"><strong>Thank you. We will contact you shortly.</strong></div>').delay(3000).fadeOut(2000);
-                },
-                error: $('.thanks').show()
-            });
-            return false;
-        }
-    });
+    //var reservationForm = $(".reservationForm"),
+    //    reservationResult = $('.reservation-result');
+    //reservationForm.validate({
+    //    debug: false,
+    //    submitHandler: function(reservationForm) {
+    //        $(reservationResult, reservationPopupForm).html('Please Wait...');
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "~/Front/assets/php/reservationpopup.php",
+    //            data: $(reservationForm).serialize(),
+    //            timeout: 20000,
+    //            success: function(msg) {
+    //                $(reservationResult, reservationForm).html('<div class="alert alert-success" role="alert"><strong>Thank you. We will contact you shortly.</strong></div>').delay(3000).fadeOut(2000);
+    //            },
+    //            error: $('.thanks').show()
+    //        });
+    //        return false;
+    //    }
+    //});
 
 }(jQuery));
