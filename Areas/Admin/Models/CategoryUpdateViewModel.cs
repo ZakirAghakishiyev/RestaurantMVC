@@ -7,3 +7,4 @@ public class CategoryUpdateViewModel
     public string? CoverImgUrl { get; set; }
     public IFormFile? CoverImageFile { get; set; }
 }
+

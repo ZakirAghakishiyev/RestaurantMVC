@@ -1,0 +1,38 @@
+﻿@model LocalOrderCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Local Order";
+}
+
+<h2>Create Local Order</h2>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Create" method="post" novalidate>
+            <div class="mb-3">
+                <label asp-for="TableNo" class="form-label"></label>
+                <input asp-for="TableNo" class="form-control" placeholder="Enter Table Number..." />
+                <span asp-validation-for="TableNo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ReservationID" class="form-label"></label>
+                <select asp-for="ReservationID" asp-items="ViewBag.Reservations" class="form-select">
+                    <option value="">-- Optional Reservation --</option>
+                </select>
+                <span asp-validation-for="ReservationID" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="menuItemsSelect">Select Menu Items</label>
+                <select asp-for="Items" asp-items="ViewBag.MenuItems" class="form-select" id="menuItemsSelect" multiple="multiple" name="MenuItemIds">
+                </select>
+                <span asp-validation-for="Items" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Order</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
+

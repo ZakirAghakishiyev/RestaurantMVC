@@ -1,0 +1,84 @@
+﻿@model List<LocalOrder>
+
+<a asp-controller="LocalOrder" asp-action="Create" class="btn btn-primary mb-3" style="width:100px">Create</a>
+
+<div class="card">
+    <h5 class="card-header">Local Orders</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Table No</th>
+                    <th>Order Date</th>
+                    <th>Reservation</th>
+                    <th>Items Count</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td><strong>@order.Id</strong></td>
+                        <td>@order.TableNo</td>
+                        <td>@order.OrderDate.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>
+                            @(order.Reservation != null
+                                ? $"{order.Reservation.GuestFirstName} {order.Reservation.GuestLastName}"
+                                : "—")
+                        </td>
+                        <td>@order.OrderItems?.Count()</td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a asp-controller="LocalOrder" asp-action="Update" asp-route-id="@order.Id" class="dropdown-item">
+                                        <i class="bx bx-edit-alt me-1"></i> Update
+                                    </a>
+                                    <a asp-controller="LocalOrder" asp-action="Details" asp-route-id="@order.Id" class="dropdown-item">
+                                        <i class="bx bx-fullscreen me-1"></i> Details
+                                    </a>
+                                    <a onclick="DeleteFunc(@order.Id, this)" class="dropdown-item" href="javascript:void(0);">
+                                        <i class="bx bx-trash me-1"></i> Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function DeleteFunc(id, button){
+    const url = '/admin/localOrder/delete';
+    const data = {
+      id: id,
+    };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    fetch(url, options)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        button.parentNode.parentNode.parentNode.parentNode.remove();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+    }
+</script>

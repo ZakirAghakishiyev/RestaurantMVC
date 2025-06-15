@@ -53,7 +53,6 @@ namespace RestaurantMVC.Areas.Admin.Controllers
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> Create(ReservationCreateViewModel model)
         //{
-        //    ViewBag.Tables = await _dbContext.Tables
         //        .Select(t => new SelectListItem
         //        {
         //            Text = $"Table #{t.Id} - Capacity: {t.Capacity}",

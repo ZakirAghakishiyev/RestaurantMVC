@@ -139,58 +139,68 @@
 
           <div class="menu-inner-shadow"></div>
 
-          <ul class="menu-inner py-1">
-            <!-- Dashboard -->
-            <li class="menu-item active">
-              <a asp-controller="Dashboard" asp-action="index" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a asp-controller="Category" asp-action="index" class="menu-link">
-                  <i class="menu-icon tf-icons bx  bx-category"></i>
-                  <div data-i18n="Analytics">Categories</div>
-              </a>
-            </li>
-            <li class="menu-item">
-                <a asp-controller="Chef" asp-action="index" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-cap" ></i>
-                    <div data-i18n="Analytics">Chefs</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a asp-controller="Table" asp-action="index" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-chair"></i>
-                    <div data-i18n="Analytics">Tables</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a asp-controller="MenuItem" asp-action="index" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-food-menu"></i>
-                    <div data-i18n="Analytics">Menu Items</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a asp-controller="User" asp-action="index" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user"></i>
-                    <div data-i18n="Analytics">Users</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a asp-controller="Role" asp-action="index" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-square"></i>
-                    <div data-i18n="Analytics">Roles</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                <a asp-controller="Reservation" asp-action="index" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-bookmark-alt"></i>
-                    <div data-i18n="Analytics">Reservations</div>
-                </a>
-            </li>
-          </ul>
-        </aside>
+                @{
+                    string currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+                    string currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+                }
+
+                <ul class="menu-inner py-1">
+                    <li class="menu-item @(currentController == "Dashboard" && currentAction == "Index" ? "active" : "")">
+                        <a asp-controller="Dashboard" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Dashboard</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @(currentController == "Category" && currentAction == "Index" ? "active" : "")">
+                        <a asp-controller="Category" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-category"></i>
+                            <div data-i18n="Analytics">Categories</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @(currentController == "Chef" && currentAction == "Index" ? "active" : "")">
+                        <a asp-controller="Chef" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-cap"></i>
+                            <div data-i18n="Analytics">Chefs</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @(currentController == "Table" && currentAction == "Index" ? "active" : "")">
+                        <a asp-controller="Table" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-chair"></i>
+                            <div data-i18n="Analytics">Tables</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @(currentController == "MenuItem" && currentAction == "Index" ? "active" : "")">
+                        <a asp-controller="MenuItem" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-food-menu"></i>
+                            <div data-i18n="Analytics">Menu Items</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @(currentController == "User" && currentAction == "Index" ? "active" : "")">
+                        <a asp-controller="User" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Analytics">Users</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @(currentController == "Role" && currentAction == "Index" ? "active" : "")">
+                        <a asp-controller="Role" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-square"></i>
+                            <div data-i18n="Analytics">Roles</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @(currentController == "Reservation" && currentAction == "Index" ? "active" : "")">
+                        <a asp-controller="Reservation" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-bookmark-alt"></i>
+                            <div data-i18n="Analytics">Reservations</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @(currentController == "LocalOrder" && currentAction == "Index" ? "active" : "")">
+                        <a asp-controller="LocalOrder" asp-action="Index" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-paper-plane"></i>
+                            <div data-i18n="Analytics">Local Orders</div>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
         <!-- / Menu -->
 
         <!-- Layout container -->

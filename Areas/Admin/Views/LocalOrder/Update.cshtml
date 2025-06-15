@@ -1,0 +1,118 @@
+﻿@model LocalOrderUpdateViewModel
+
+@{
+    ViewData["Title"] = "Update Local Order";
+}
+
+<h2>Update Local Order</h2>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Update" method="post" novalidate>
+            @* Hidden ID *@
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="TableNo" class="form-label"></label>
+                <input asp-for="TableNo" class="form-control" placeholder="Enter Table Number..." />
+                <span asp-validation-for="TableNo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ReservationID" class="form-label"></label>
+                <select asp-for="ReservationID" asp-items="ViewBag.Reservations" class="form-select">
+                    <option value="">-- Optional Reservation --</option>
+                </select>
+                <span asp-validation-for="ReservationID" class="text-danger"></span>
+            </div>
+
+            <hr />
+            <h5>Order Items</h5>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Menu Item</th>
+                        <th style="width: 120px;">Quantity</th>
+                        <th style="width: 100px;">Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="orderItemsBody">
+                    @for (int i = 0; i < Model.Items.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <select asp-for="Items[@i].MenuItemId"
+                                        asp-items="ViewBag.MenuItems"
+                                        class="form-select">
+                                    <option value="">-- Select Menu Item --</option>
+                                </select>
+                                <span asp-validation-for="Items[@i].MenuItemId" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Items[@i].Count"
+                                       type="number"
+                                       min="1"
+                                       class="form-control" />
+                                <span asp-validation-for="Items[@i].Count" class="text-danger"></span>
+                            </td>
+                            <td class="text-center align-middle">
+                                <button type="button" class="btn btn-danger btn-sm remove-item-btn" title="Remove item">&times;</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <button type="button" id="addItemBtn" class="btn btn-secondary mb-3">Add Menu Item</button>
+
+            <br />
+
+            <button type="submit" class="btn btn-primary">Update Order</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<script>
+    (function() {
+        let itemIndex = @Model.Items.Count;
+
+        // Add new row for a menu item
+        document.getElementById('addItemBtn').addEventListener('click', function() {
+            const tbody = document.getElementById('orderItemsBody');
+            const newRow = document.createElement('tr');
+
+            newRow.innerHTML = `
+                <td>
+                    <select name="Items[${itemIndex}].MenuItemId" class="form-select" required>
+                        <option value="">-- Select Menu Item --</option>
+    @foreach (var menuItem in (IEnumerable<SelectListItem>)ViewBag.MenuItems)
+    {
+        <text><option value="@menuItem.Value">@menuItem.Text</option></text>
+    }
+                    </select>
+                    <span class="text-danger field-validation-valid" data-valmsg-for="Items[${itemIndex}].MenuItemId" data-valmsg-replace="true"></span>
+                </td>
+                <td>
+                    <input type="number" name="Items[${itemIndex}].Count" class="form-control" value="1" min="1" required />
+                    <span class="text-danger field-validation-valid" data-valmsg-for="Items[${itemIndex}].Count" data-valmsg-replace="true"></span>
+                </td>
+                <td class="text-center align-middle">
+                    <button type="button" class="btn btn-danger btn-sm remove-item-btn" title="Remove item">&times;</button>
+                </td>`;
+
+            tbody.appendChild(newRow);
+
+            itemIndex++;
+        });
+
+        // Remove row handler (event delegation)
+        document.getElementById('orderItemsBody').addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('remove-item-btn')) {
+                e.target.closest('tr').remove();
+            }
+        });
+    })();
+</script>
+
