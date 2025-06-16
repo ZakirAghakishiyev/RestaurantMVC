@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Pb304PetShop.DataContext.Entities;
 using RestaurantMVC.DataContext;
+using RestaurantMVC.Mailing;
+using RestaurantMVC.Mailing.MailKitImplementations;
 
 namespace RestaurantMVC
 {
@@ -38,6 +40,10 @@ namespace RestaurantMVC
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
             });
+
+
+            builder.Services.AddTransient<IMailService, MailKitMailService>();
+
             FilePathConstants.CategoryPath = Path.Combine(builder.Environment.WebRootPath, "images", "category");
             FilePathConstants.MenuItemPath = Path.Combine(builder.Environment.WebRootPath, "images", "menuItem");
             FilePathConstants.ChefPath = Path.Combine(builder.Environment.WebRootPath, "images", "chef");

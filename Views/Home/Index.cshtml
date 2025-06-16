@@ -1,4 +1,6 @@
-﻿    <!-- START REVOLUTION SLIDER 5.0 -->
+﻿@model List<Chef>  
+  
+<!-- START REVOLUTION SLIDER 5.0 -->
 <div class="rev_slider_wrapper">
     <div id="slider1" class="rev_slider" data-version="5.0">
         <ul>
@@ -999,129 +1001,40 @@
     <div class="container">
         <div class="row">
             <!-- Member #1 -->
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <div class="member">
-                    <div class="member-img">
-                        <img src="~/Front/assets/images/team/1.jpg" alt="member">
-                        <div class="member-overlay">
-                            <div class="member-hover">
-                                <div class="pos-vertical-center">
-                                    <div class="member-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-instagram"></i></a>
+            @foreach(var item in Model){
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="member">
+                        <div class="member-img">
+                            <img src="~/images/chef/@item.CoverImgUrl" alt="member">
+                            <div class="member-overlay">
+                                <div class="member-hover">
+                                    <div class="pos-vertical-center">
+                                        <div class="member-social">
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <a href="#"><i class="fa fa-twitter"></i></a>
+                                            <a href="#"><i class="fa fa-instagram"></i></a>
+                                        </div>
+                                        <!-- .memebr-social end -->
                                     </div>
-                                    <!-- .memebr-social end -->
+                                    <!-- .pos-vertical-center end -->
                                 </div>
-                                <!-- .pos-vertical-center end -->
+                                <!-- .memebr-hover end -->
                             </div>
-                            <!-- .memebr-hover end -->
+                            <!-- .memebr-ovelay end -->
                         </div>
-                        <!-- .memebr-ovelay end -->
-                    </div>
-                    <!-- .member-img end -->
-                    <div class="member-info">
-                        <h5>James Carter</h5>
-                        <h6>CEO & Founder</h6>
-                    </div>
-                    <!-- .member-info end -->
-                </div>
-                <!-- .member end -->
-            </div>
-            <!-- .col-md-3 end -->
-            <!-- Member #2 -->
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <div class="member">
-                    <div class="member-img">
-                        <img src="~/Front/assets/images/team/2.jpg" alt="member">
-                        <div class="member-overlay">
-                            <div class="member-hover">
-                                <div class="pos-vertical-center">
-                                    <div class="member-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                    <!-- .memebr-social end -->
-                                </div>
-                                <!-- .pos-vertical-center end -->
-                            </div>
-                            <!-- .memebr-hover end -->
+                        <!-- .member-img end -->
+                        <div class="member-info">
+                            <h5>@item.Fullname</h5>
+                            <h6>@item.Role</h6>
                         </div>
-                        <!-- .memebr-ovelay end -->
+                        <!-- .member-info end -->
                     </div>
-                    <!-- .member-img end -->
-                    <div class="member-info">
-                        <h5>Adam Smith</h5>
-                        <h6>Master Chef</h6>
-                    </div>
-                    <!-- .member-info end -->
+                    <!-- .member end -->
                 </div>
-                <!-- .member end -->
-            </div>
+
+            }
             <!-- .col-md-3 end -->
-            <!-- Member #3 -->
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <div class="member">
-                    <div class="member-img">
-                        <img src="~/Front/assets/images/team/3.jpg" alt="member">
-                        <div class="member-overlay">
-                            <div class="member-hover">
-                                <div class="pos-vertical-center">
-                                    <div class="member-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                    <!-- .memebr-social end -->
-                                </div>
-                                <!-- .pos-vertical-center end -->
-                            </div>
-                            <!-- .memebr-hover end -->
-                        </div>
-                        <!-- .memebr-ovelay end -->
-                    </div>
-                    <!-- .member-img end -->
-                    <div class="member-info">
-                        <h5>Gene Stevens</h5>
-                        <h6>Thai Master Chef</h6>
-                    </div>
-                    <!-- .member-info end -->
-                </div>
-                <!-- .member end -->
-            </div>
-            <!-- .col-md-3 end -->
-            <!-- Member #4 -->
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <div class="member">
-                    <div class="member-img">
-                        <img src="~/Front/assets/images/team/4.jpg" alt="member">
-                        <div class="member-overlay">
-                            <div class="member-hover">
-                                <div class="pos-vertical-center">
-                                    <div class="member-social">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                    <!-- .memebr-social end -->
-                                </div>
-                                <!-- .pos-vertical-center end -->
-                            </div>
-                            <!-- .memebr-hover end -->
-                        </div>
-                        <!-- .memebr-ovelay end -->
-                    </div>
-                    <!-- .member-img end -->
-                    <div class="member-info">
-                        <h5>Walter Adler</h5>
-                        <h6>Chinese Master Chef</h6>
-                    </div>
-                    <!-- .member-info end -->
-                </div>
-                <!-- .member end -->
-            </div>
-            <!-- .col-md-3 end -->
+
         </div>
     </div>
 </section>
