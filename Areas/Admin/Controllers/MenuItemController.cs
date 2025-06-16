@@ -101,6 +101,7 @@ namespace RestaurantMVC.Areas.Admin.Controllers
         
         public async Task<IActionResult> Update(MenuItem model)
         {
+            Console.WriteLine("Entered");
             if (!ModelState.IsValid)
             {
                 var categories = await _dbContext.Categories.ToListAsync();

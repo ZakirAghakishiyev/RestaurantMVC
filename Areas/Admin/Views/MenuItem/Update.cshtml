@@ -2,7 +2,6 @@
 
 <div class="card-body">
     <form method="post" enctype="multipart/form-data">
-        <input type="hidden" asp-for="Id" />
         <div class="mb-3">
             <label class="form-label" asp-for="Name"></label>
             <input asp-for="Name" class="form-control" placeholder="Item name..." />
@@ -22,9 +21,9 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label" asp-for="Category"></label>
+            <label class="form-label" asp-for="CategoryId"></label>
             <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control">
-                <option value="">Category</option>
+                <option value="">-- Select Category --</option>
             </select>
             <span asp-validation-for="CategoryId" class="text-danger"></span>
         </div>
@@ -40,7 +39,7 @@
             <label class="form-check-label" asp-for="IsAvailable">Available</label>
         </div>
 
-        <button type="submit" class="btn btn-primary">Send</button>
+        <button type="submit" class="btn btn-primary">Create</button>
         <a asp-action="Index" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
